@@ -35,28 +35,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     _createClass(Fixed, [{
       key: 'init',
       value: function init() {
-        var _this = this;
-
-        this.$window.resize(function () {
-          _this.calculateVariables();
-          _this.checkResize();
-        });
-
-        this.calculateVariables();
-
-        this.lastFrame = this.check();
-      }
-    }, {
-      key: 'calculateVariables',
-      value: function calculateVariables() {
         this.minScroll = this.$element.outerHeight() + this.$element.offset().top;
-      }
-    }, {
-      key: 'checkResize',
-      value: function checkResize() {
+
         if (this.$window.width() >= 682 && !this.lastFrame) {
           this.lastFrame = this.check();
         }
+
+        this.registerEvents();
+      }
+    }, {
+      key: 'registerEvents',
+      value: function registerEvents() {
+        var _this = this;
+
+        this.$window.resize(function () {
+          _this.init();
+        });
       }
     }, {
       key: 'check',
@@ -94,8 +88,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.previousScroll = currentScroll;
 
         if (this.$window.width() > 682) {
-          cancelAnimationFrame(this.lastFrame);
           this.lastFrame = this.check();
+        } else {
+          this.lastFrame = null;
         }
 
         return this.lastFrame;

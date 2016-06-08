@@ -25,24 +25,19 @@
     }
 
     init() {
-      this.$window.resize(() => {
-        this.calculateVariables();
-        this.checkResize();
-      });
-
-      this.calculateVariables();
-
-      this.lastFrame = this.check();
-    }
-
-    calculateVariables() {
       this.minScroll = this.$element.outerHeight() + this.$element.offset().top;
-    }
 
-    checkResize() {
-      if (this.$window.width() >= 682 && ! this.lastFrame) {
+      if(this.$window.width() >= 682 && ! this.lastFrame) {
         this.lastFrame = this.check();
       }
+
+      this.registerEvents();
+    }
+
+    registerEvents() {
+      this.$window.resize(() => {
+        this.init();
+      });
     }
 
     check() {
@@ -75,9 +70,10 @@
 
       this.previousScroll = currentScroll;
 
-      if (this.$window.width() > 682) {
-        cancelAnimationFrame(this.lastFrame);
+      if(this.$window.width() > 682) {
         this.lastFrame = this.check();
+      } else {
+        this.lastFrame = null;
       }
 
       return this.lastFrame;
