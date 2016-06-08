@@ -26,7 +26,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       this.$window = $(window);
       this.delta = options.delta;
       this.fixed = false;
-      this.minScroll = element.outerHeight();
       this.scrolling = false;
       this.upScroll = 0;
       this.previousScroll = 0;
@@ -39,10 +38,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var _this = this;
 
         this.$window.resize(function () {
-          _this.resizeCheck();
+          _this.calculateVariables();
         });
 
+        this.calculateVariables();
+
         return this.check();
+      }
+    }, {
+      key: 'calculateVariables',
+      value: function calculateVariables() {
+        this.minScroll = this.$element.outerHeight() + this.$element.offset().top;
+
+        if (this.$window.width() >= 682) {
+          this.check();
+        }
       }
     }, {
       key: 'check',
@@ -52,15 +62,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return requestAnimationFrame(function () {
           _this2.calculate();
         });
-      }
-    }, {
-      key: 'resizeCheck',
-      value: function resizeCheck() {
-        this.minScroll = this.$element.outerHeight();
-
-        if (this.$window.width() >= 682) {
-          this.check();
-        }
       }
     }, {
       key: 'calculate',

@@ -18,7 +18,6 @@
       this.$window = $(window);
       this.delta = options.delta;
       this.fixed = false;
-      this.minScroll = element.outerHeight();
       this.scrolling = false;
       this.upScroll = 0;
       this.previousScroll = 0;
@@ -27,24 +26,26 @@
 
     init() {
       this.$window.resize(() => {
-        this.resizeCheck();
+        this.calculateVariables();
       });
 
+      this.calculateVariables();
+
       return this.check();
+    }
+
+    calculateVariables() {
+      this.minScroll = this.$element.outerHeight() + this.$element.offset().top;
+
+      if (this.$window.width() >= 682) {
+        this.check();
+      }
     }
 
     check() {
       return requestAnimationFrame(() => {
         this.calculate();
       });
-    }
-
-    resizeCheck() {
-      this.minScroll = this.$element.outerHeight();
-
-      if (this.$window.width() >= 682) {
-        this.check();
-      }
     }
 
     calculate() {
