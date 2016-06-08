@@ -39,19 +39,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.$window.resize(function () {
           _this.calculateVariables();
+          _this.checkResize();
         });
 
         this.calculateVariables();
 
-        return this.check();
+        this.lastFrame = this.check();
       }
     }, {
       key: 'calculateVariables',
       value: function calculateVariables() {
         this.minScroll = this.$element.outerHeight() + this.$element.offset().top;
-
-        if (this.$window.width() >= 682) {
-          this.check();
+      }
+    }, {
+      key: 'checkResize',
+      value: function checkResize() {
+        if (this.$window.width() >= 682 && !this.lastFrame) {
+          this.lastFrame = this.check();
         }
       }
     }, {

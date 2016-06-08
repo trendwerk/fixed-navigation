@@ -27,18 +27,21 @@
     init() {
       this.$window.resize(() => {
         this.calculateVariables();
+        this.checkResize();
       });
 
       this.calculateVariables();
 
-      return this.check();
+      this.lastFrame = this.check();
     }
 
     calculateVariables() {
       this.minScroll = this.$element.outerHeight() + this.$element.offset().top;
+    }
 
-      if (this.$window.width() >= 682) {
-        this.check();
+    checkResize() {
+      if (this.$window.width() >= 682 && ! this.lastFrame) {
+        this.lastFrame = this.check();
       }
     }
 
