@@ -48,11 +48,7 @@
 
 	var _plugin = __webpack_require__(1);
 
-	var _plugin2 = _interopRequireDefault(_plugin);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var plugin = new _plugin2.default(window.jQuery);
+	var plugin = new _plugin.Plugin(window.jQuery);
 	plugin.init();
 
 /***/ },
@@ -64,18 +60,15 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.Plugin = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _fixed = __webpack_require__(2);
 
-	var _fixed2 = _interopRequireDefault(_fixed);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var Plugin = function () {
+	var Plugin = exports.Plugin = function () {
 	  function Plugin(jQuery) {
 	    _classCallCheck(this, Plugin);
 
@@ -93,7 +86,7 @@
 	          minWidth: 0
 	        };
 
-	        var fixed = new _fixed2.default(this, jQuery(window), jQuery.extend(defaults, options));
+	        var fixed = new _fixed.Fixed(this, jQuery(window), jQuery.extend(defaults, options));
 	        fixed.init();
 
 	        return fixed;
@@ -103,8 +96,6 @@
 
 	  return Plugin;
 	}();
-
-	exports.default = Plugin;
 
 /***/ },
 /* 2 */
@@ -120,7 +111,7 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var Fixed = function () {
+	var Fixed = exports.Fixed = function () {
 	  function Fixed(element, context, options) {
 	    _classCallCheck(this, Fixed);
 
@@ -235,8 +226,6 @@
 
 	  return Fixed;
 	}();
-
-	exports.default = Fixed;
 
 /***/ }
 /******/ ]);

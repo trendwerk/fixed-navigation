@@ -1,6 +1,6 @@
-import Fixed from './fixed';
+import { Fixed } from './fixed';
 
-export default class Plugin {
+export class Plugin {
   constructor(jQuery) {
     this.jQuery = jQuery;
   }

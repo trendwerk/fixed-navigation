@@ -1,4 +1,4 @@
-export default class Fixed {
+export class Fixed {
   constructor(element, context, options) {
     this.$context = context;
     this.$element = element;
