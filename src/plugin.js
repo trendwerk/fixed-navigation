@@ -16,6 +16,7 @@ export class Plugin {
 
       const fixed = new Fixed(this, jQuery(window), jQuery.extend(defaults, options));
       fixed.init();
+      fixed.registerEvents();
 
       return fixed;
     };

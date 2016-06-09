@@ -88,6 +88,7 @@
 
 	        var fixed = new _fixed.Fixed(this, jQuery(window), jQuery.extend(defaults, options));
 	        fixed.init();
+	        fixed.registerEvents();
 
 	        return fixed;
 	      };
@@ -135,8 +136,6 @@
 	      if (this.$context.width() >= this.minWidth && !this.lastFrame) {
 	        this.lastFrame = this.check();
 	      }
-
-	      this.registerEvents();
 	    }
 	  }, {
 	    key: 'registerEvents',
