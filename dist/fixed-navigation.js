@@ -82,7 +82,7 @@
 
 	      this.jQuery.fn.fixedNavigation = function fixedNavigation(options) {
 	        if (!window.requestAnimationFrame) {
-	          return;
+	          return false;
 	        }
 
 	        var defaults = {
