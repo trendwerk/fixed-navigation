@@ -3,7 +3,7 @@
 let webpack = require('webpack');
 
 module.exports = {
-  entry:  './src/fixed-navigation.js',
+  entry:  './src/index.js',
   output: {
     path: './dist',
     filename: 'fixed-navigation.js'
@@ -26,8 +26,5 @@ module.exports = {
         }
       }
     ]
-  },
-  external: {
-    'jQuery': 'jQuery'
   }
 };

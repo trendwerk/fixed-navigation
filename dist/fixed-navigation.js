@@ -46,28 +46,68 @@
 
 	'use strict';
 
-	var _fixed = __webpack_require__(1);
+	var _plugin = __webpack_require__(1);
+
+	var _plugin2 = _interopRequireDefault(_plugin);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var plugin = new _plugin2.default(window.jQuery);
+	plugin.init();
+
+/***/ },
+/* 1 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _fixed = __webpack_require__(2);
 
 	var _fixed2 = _interopRequireDefault(_fixed);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	(function register($) {
-	  $.fn.fixedNavigation = function fixedNavigation(options) {
-	    var defaults = {
-	      delta: 40,
-	      minWidth: 0
-	    };
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	    var fixed = new _fixed2.default(this, $(window), $.extend(defaults, options));
-	    fixed.init();
+	var Plugin = function () {
+	  function Plugin(jQuery) {
+	    _classCallCheck(this, Plugin);
 
-	    return fixed;
-	  };
-	})(window.jQuery);
+	    this.jQuery = jQuery;
+	  }
+
+	  _createClass(Plugin, [{
+	    key: 'init',
+	    value: function init() {
+	      var jQuery = this.jQuery;
+
+	      this.jQuery.fn.fixedNavigation = function fixedNavigation(options) {
+	        var defaults = {
+	          delta: 40,
+	          minWidth: 0
+	        };
+
+	        var fixed = new _fixed2.default(this, jQuery(window), jQuery.extend(defaults, options));
+	        fixed.init();
+
+	        return fixed;
+	      };
+	    }
+	  }]);
+
+	  return Plugin;
+	}();
+
+	exports.default = Plugin;
 
 /***/ },
-/* 1 */
+/* 2 */
 /***/ function(module, exports) {
 
 	'use strict';
