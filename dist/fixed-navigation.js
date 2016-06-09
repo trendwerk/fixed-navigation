@@ -27,11 +27,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       this.$window = $(window);
       this.delta = options.delta;
       this.fixed = false;
+      this.lastFrame = null;
       this.minWidth = options.minWidth;
+      this.previousScroll = 0;
       this.scrolling = false;
       this.upScroll = 0;
-      this.previousScroll = 0;
-      this.lastFrame = null;
     }
 
     _createClass(Fixed, [{
