@@ -5,7 +5,6 @@
  */
 var gulp = require('gulp'),
     babel = require('gulp-babel'),
-    cache = require('gulp-cached'),
     beep = require('beepbeep'),
     plumber = require('gulp-plumber'),
     lint = require('gulp-eslint');
@@ -37,9 +36,6 @@ gulp.src = function() {
  */
 gulp.task('lint', function() {
   return gulp.src(files)
-
-  // Use cache to filter out unmodified files
-  .pipe(cache('lint'))
 
   // Lint
   .pipe(lint())
