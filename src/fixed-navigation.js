@@ -2,6 +2,7 @@
   $.fn.fixedNavigation = function(options) {
     const defaults = {
       delta: 40,
+      minWidth: 0,
     };
 
     options = $.extend(defaults, options);
@@ -18,6 +19,7 @@
       this.$window = $(window);
       this.delta = options.delta;
       this.fixed = false;
+      this.minWidth = options.minWidth;
       this.scrolling = false;
       this.upScroll = 0;
       this.previousScroll = 0;
@@ -27,7 +29,7 @@
     init() {
       this.minScroll = this.$element.outerHeight() + this.$element.offset().top;
 
-      if(this.$window.width() >= 682 && ! this.lastFrame) {
+      if(this.$window.width() >= this.minWidth && ! this.lastFrame) {
         this.lastFrame = this.check();
       }
 
@@ -70,7 +72,7 @@
 
       this.previousScroll = currentScroll;
 
-      if(this.$window.width() > 682) {
+      if(this.$window.width() > this.minWidth) {
         this.lastFrame = this.check();
       } else {
         this.lastFrame = null;

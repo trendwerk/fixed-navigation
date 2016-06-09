@@ -7,7 +7,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 (function ($) {
   $.fn.fixedNavigation = function (options) {
     var defaults = {
-      delta: 40
+      delta: 40,
+      minWidth: 0
     };
 
     options = $.extend(defaults, options);
@@ -26,6 +27,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       this.$window = $(window);
       this.delta = options.delta;
       this.fixed = false;
+      this.minWidth = options.minWidth;
       this.scrolling = false;
       this.upScroll = 0;
       this.previousScroll = 0;
@@ -37,7 +39,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       value: function init() {
         this.minScroll = this.$element.outerHeight() + this.$element.offset().top;
 
-        if (this.$window.width() >= 682 && !this.lastFrame) {
+        if (this.$window.width() >= this.minWidth && !this.lastFrame) {
           this.lastFrame = this.check();
         }
 
@@ -87,7 +89,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.previousScroll = currentScroll;
 
-        if (this.$window.width() > 682) {
+        if (this.$window.width() > this.minWidth) {
           this.lastFrame = this.check();
         } else {
           this.lastFrame = null;
