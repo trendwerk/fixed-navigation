@@ -29,7 +29,7 @@
     init() {
       this.minScroll = this.$element.outerHeight() + this.$element.offset().top;
 
-      if(this.$window.width() >= this.minWidth && ! this.lastFrame) {
+      if (this.$window.width() >= this.minWidth && ! this.lastFrame) {
         this.lastFrame = this.check();
       }
 
@@ -51,16 +51,16 @@
     calculate() {
       let currentScroll = this.$window.scrollTop();
 
-      if(currentScroll > this.minScroll) {
+      if (currentScroll > this.minScroll) {
         this._setScrolling();
 
-        if(this.previousScroll >= currentScroll) {
+        if (this.previousScroll >= currentScroll) {
           this.upScroll += (this.previousScroll - currentScroll);
         } else {
           this.upScroll = 0;
         }
 
-        if(this.upScroll >= this.delta) {
+        if (this.upScroll >= this.delta) {
           this._setFixed();
         } else {
           this._removeFixed();
@@ -72,7 +72,7 @@
 
       this.previousScroll = currentScroll;
 
-      if(this.$window.width() > this.minWidth) {
+      if (this.$window.width() > this.minWidth) {
         this.lastFrame = this.check();
       } else {
         this.lastFrame = null;
@@ -82,28 +82,28 @@
     }
 
     _setScrolling() {
-      if(! this.scrolling) {
+      if (! this.scrolling) {
         this.$element.addClass('scrolling');
         this.scrolling = true;
       }
     }
 
     _removeScrolling() {
-      if(this.scrolling) {
+      if (this.scrolling) {
         this.$element.removeClass('scrolling');
         this.scrolling = false;
       }
     }
 
     _setFixed() {
-      if(! this.fixed) {
+      if (! this.fixed) {
         this.$element.addClass('fixed');
         this.fixed = true;
       }
     }
 
     _removeFixed() {
-      if(this.fixed) {
+      if (this.fixed) {
         this.$element.removeClass('fixed');
         this.fixed = false;
       }
