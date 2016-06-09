@@ -1,13 +1,11 @@
-(function($) {
-  $.fn.fixedNavigation = function(options) {
+(function register($) {
+  $.fn.fixedNavigation = function fixedNavigation(options) {
     const defaults = {
       delta: 40,
       minWidth: 0,
     };
 
-    options = $.extend(defaults, options);
-
-    const fixed = new Fixed(this, options);
+    const fixed = new Fixed(this, $.extend(defaults, options));
     fixed.init();
 
     return fixed;
@@ -30,6 +28,7 @@
       this.minScroll = this.$element.outerHeight() + this.$element.offset().top;
 
       if (this.$window.width() >= this.minWidth && ! this.lastFrame) {
+        console.log('start');
         this.lastFrame = this.check();
       }
 
@@ -49,6 +48,7 @@
     }
 
     calculate() {
+      console.log('running');
       let currentScroll = this.$window.scrollTop();
 
       if (currentScroll > this.minScroll) {
@@ -75,6 +75,7 @@
       if (this.$window.width() > this.minWidth) {
         this.lastFrame = this.check();
       } else {
+        console.log('end');
         this.lastFrame = null;
       }
 
@@ -109,4 +110,4 @@
       }
     }
   }
-})(jQuery);
+}(jQuery));

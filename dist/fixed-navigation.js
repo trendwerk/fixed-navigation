@@ -4,16 +4,14 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-(function ($) {
-  $.fn.fixedNavigation = function (options) {
+(function register($) {
+  $.fn.fixedNavigation = function fixedNavigation(options) {
     var defaults = {
       delta: 40,
       minWidth: 0
     };
 
-    options = $.extend(defaults, options);
-
-    var fixed = new Fixed(this, options);
+    var fixed = new Fixed(this, $.extend(defaults, options));
     fixed.init();
 
     return fixed;
@@ -40,6 +38,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.minScroll = this.$element.outerHeight() + this.$element.offset().top;
 
         if (this.$window.width() >= this.minWidth && !this.lastFrame) {
+          console.log('start');
           this.lastFrame = this.check();
         }
 
@@ -66,6 +65,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: 'calculate',
       value: function calculate() {
+        console.log('running');
         var currentScroll = this.$window.scrollTop();
 
         if (currentScroll > this.minScroll) {
@@ -92,6 +92,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (this.$window.width() > this.minWidth) {
           this.lastFrame = this.check();
         } else {
+          console.log('end');
           this.lastFrame = null;
         }
 

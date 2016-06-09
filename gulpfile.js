@@ -50,7 +50,7 @@ gulp.task('lint', function() {
 /**
  * Compile
  */
-gulp.task('js', ['lint'], function() {
+gulp.task('js', function() {
   return gulp.src(files)
 
   // Babel
