@@ -9,6 +9,10 @@ export class Plugin {
     const jQuery = this.jQuery;
 
     this.jQuery.fn.fixedNavigation = function fixedNavigation(options) {
+      if (! window.requestAnimationFrame) {
+        return;
+      }
+      
       const defaults = {
         delta: 40,
         minWidth: 0,

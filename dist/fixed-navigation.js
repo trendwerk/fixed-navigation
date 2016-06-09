@@ -81,6 +81,10 @@
 	      var jQuery = this.jQuery;
 
 	      this.jQuery.fn.fixedNavigation = function fixedNavigation(options) {
+	        if (!window.requestAnimationFrame) {
+	          return;
+	        }
+
 	        var defaults = {
 	          delta: 40,
 	          minWidth: 0
