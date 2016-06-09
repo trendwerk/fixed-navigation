@@ -8,7 +8,7 @@ var gulp = require('gulp'),
     cache = require('gulp-cached'),
     beep = require('beepbeep'),
     plumber = require('gulp-plumber'),
-    lint = require('gulp-jshint');
+    lint = require('gulp-eslint');
 
 /**
  * Setup files to watch
@@ -42,15 +42,13 @@ gulp.task('lint', function() {
   .pipe(cache('lint'))
 
   // Lint
-  .pipe(lint({
-    esversion: 6
-  }))
+  .pipe(lint())
 
   // Report errors
-  .pipe(lint.reporter())
+  .pipe(lint.format())
 
   // Make reporter fail task on error
-  .pipe(lint.reporter('fail'))
+  .pipe(lint.failAfterError())
 });
 
 /**
