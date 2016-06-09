@@ -9,6 +9,13 @@ module.exports = {
     filename: 'fixed-navigation.js'
   },
   module: {
+    preLoaders: [
+      {
+        test: /\.js/,
+        loader: 'eslint-loader',
+        include: __dirname + '/src'
+      }
+    ],
     loaders: [
       {
         test: /\.js/,
@@ -17,15 +24,10 @@ module.exports = {
         query: {
           presets: ['es2015']
         }
-      },
-      {
-        test: /\.js/,
-        loader: 'eslint-loader',
-        include: __dirname + '/src'
       }
     ]
   },
-  eslint: {
-    failOnWarning: true
+  external: {
+    'jQuery': 'jQuery'
   }
 };

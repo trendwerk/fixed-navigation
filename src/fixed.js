@@ -1,7 +1,8 @@
 export default class Fixed {
-  constructor(element, options) {
+  constructor(element, context, options) {
+    this.$context = context;
     this.$element = element;
-    this.$window = $(window);
+    this.currentScroll = 0;
     this.delta = options.delta;
     this.fixed = false;
     this.lastFrame = null;
@@ -14,8 +15,7 @@ export default class Fixed {
   init() {
     this.minScroll = this.$element.outerHeight() + this.$element.offset().top;
 
-    if (this.$window.width() >= this.minWidth && ! this.lastFrame) {
-      console.log('start');
+    if (this.$context.width() >= this.minWidth && ! this.lastFrame) {
       this.lastFrame = this.check();
     }
 
@@ -23,7 +23,7 @@ export default class Fixed {
   }
 
   registerEvents() {
-    this.$window.resize(() => {
+    this.$context.resize(() => {
       this.init();
     });
   }
@@ -35,62 +35,60 @@ export default class Fixed {
   }
 
   calculate() {
-    console.log('running');
-    let currentScroll = this.$window.scrollTop();
+    this.currentScroll = this.$context.scrollTop();
 
-    if (currentScroll > this.minScroll) {
-      this._setScrolling();
+    if (this.currentScroll > this.minScroll) {
+      this.setScrolling();
 
-      if (this.previousScroll >= currentScroll) {
-        this.upScroll += (this.previousScroll - currentScroll);
+      if (this.previousScroll >= this.currentScroll) {
+        this.upScroll += (this.previousScroll - this.currentScroll);
       } else {
         this.upScroll = 0;
       }
 
       if (this.upScroll >= this.delta) {
-        this._setFixed();
+        this.setFixed();
       } else {
-        this._removeFixed();
+        this.removeFixed();
       }
     } else {
-      this._removeScrolling();
-      this._removeFixed();
+      this.removeScrolling();
+      this.removeFixed();
     }
 
-    this.previousScroll = currentScroll;
+    this.previousScroll = this.currentScroll;
 
-    if (this.$window.width() > this.minWidth) {
+    if (this.$context.width() > this.minWidth) {
       this.lastFrame = this.check();
     } else {
-      console.log('end');
       this.lastFrame = null;
     }
 
     return this.lastFrame;
   }
 
-  _setScrolling() {
+  setScrolling() {
     if (! this.scrolling) {
       this.$element.addClass('scrolling');
       this.scrolling = true;
     }
   }
 
-  _removeScrolling() {
+  removeScrolling() {
     if (this.scrolling) {
       this.$element.removeClass('scrolling');
       this.scrolling = false;
     }
   }
 
-  _setFixed() {
+  setFixed() {
     if (! this.fixed) {
       this.$element.addClass('fixed');
       this.fixed = true;
     }
   }
 
-  _removeFixed() {
+  removeFixed() {
     if (this.fixed) {
       this.$element.removeClass('fixed');
       this.fixed = false;

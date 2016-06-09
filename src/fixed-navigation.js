@@ -7,9 +7,9 @@ import Fixed from './fixed';
       minWidth: 0,
     };
 
-    const fixed = new Fixed(this, $.extend(defaults, options));
+    const fixed = new Fixed(this, $(window), $.extend(defaults, options));
     fixed.init();
 
     return fixed;
   };
-}(jQuery));
+}(window.jQuery));
