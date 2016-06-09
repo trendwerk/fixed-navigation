@@ -1,7 +1,5 @@
 import Fixed from './fixed';
 
-console.log('test');
-
 (function register($) {
   $.fn.fixedNavigation = function fixedNavigation(options) {
     const defaults = {

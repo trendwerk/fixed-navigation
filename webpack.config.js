@@ -17,7 +17,15 @@ module.exports = {
         query: {
           presets: ['es2015']
         }
+      },
+      {
+        test: /\.js/,
+        loader: 'eslint-loader',
+        include: __dirname + '/src'
       }
     ]
+  },
+  eslint: {
+    failOnWarning: true
   }
 };
