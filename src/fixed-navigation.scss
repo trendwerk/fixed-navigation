@@ -1,6 +1,6 @@
 @mixin fixed-navigation($args: ()) {
   $settings: map-merge((
-    'speed': 0.1s,
+    'speed': 0.2s,
   ), $args);
 
   position: fixed;

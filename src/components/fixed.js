@@ -4,7 +4,7 @@ export class Fixed {
     this.$element = element;
     this.currentScroll = 0;
     this.delta = options.delta;
-    this.fixed = false;
+    this.fixed = true;
     this.lastFrame = null;
     this.minWidth = options.minWidth;
     this.previousScroll = 0;
