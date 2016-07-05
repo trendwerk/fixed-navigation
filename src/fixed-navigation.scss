@@ -3,15 +3,11 @@
     'speed': 0.1s,
   ), $args);
 
+  position: fixed;
   transition: transform map-get($settings, 'speed') ease-in-out;
   will-change: transform;
 
-  &.scrolling {
-    position: fixed;
+  &.hide-fixed {
     transform: translateY(-100%);
-  }
-
-  &.fixed {
-    transform: translateY(0);
   }
 }

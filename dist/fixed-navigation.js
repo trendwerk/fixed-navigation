@@ -128,14 +128,13 @@
 	    this.lastFrame = null;
 	    this.minWidth = options.minWidth;
 	    this.previousScroll = 0;
-	    this.scrolling = false;
 	    this.upScroll = 0;
 	  }
 
 	  _createClass(Fixed, [{
 	    key: 'init',
 	    value: function init() {
-	      this.minScroll = this.$element.outerHeight() + this.$element.offset().top;
+	      this.minScroll = this.$element.outerHeight();
 
 	      if (this.$context.width() >= this.minWidth && !this.lastFrame) {
 	        this.lastFrame = this.check();
@@ -165,8 +164,6 @@
 	      this.currentScroll = this.$context.scrollTop();
 
 	      if (this.currentScroll > this.minScroll) {
-	        this.setScrolling();
-
 	        if (this.previousScroll >= this.currentScroll) {
 	          this.upScroll += this.previousScroll - this.currentScroll;
 	        } else {
@@ -174,13 +171,12 @@
 	        }
 
 	        if (this.upScroll >= this.delta) {
-	          this.setFixed();
+	          this.showFixed();
 	        } else {
-	          this.removeFixed();
+	          this.hideFixed();
 	        }
 	      } else {
-	        this.removeScrolling();
-	        this.removeFixed();
+	        this.showFixed();
 	      }
 
 	      this.previousScroll = this.currentScroll;
@@ -194,35 +190,19 @@
 	      return this.lastFrame;
 	    }
 	  }, {
-	    key: 'setScrolling',
-	    value: function setScrolling() {
-	      if (!this.scrolling) {
-	        this.$element.addClass('scrolling');
-	        this.scrolling = true;
-	      }
-	    }
-	  }, {
-	    key: 'removeScrolling',
-	    value: function removeScrolling() {
-	      if (this.scrolling) {
-	        this.$element.removeClass('scrolling');
-	        this.scrolling = false;
-	      }
-	    }
-	  }, {
-	    key: 'setFixed',
-	    value: function setFixed() {
-	      if (!this.fixed) {
-	        this.$element.addClass('fixed');
-	        this.fixed = true;
-	      }
-	    }
-	  }, {
-	    key: 'removeFixed',
-	    value: function removeFixed() {
+	    key: 'hideFixed',
+	    value: function hideFixed() {
 	      if (this.fixed) {
-	        this.$element.removeClass('fixed');
+	        this.$element.addClass('hide-fixed');
 	        this.fixed = false;
+	      }
+	    }
+	  }, {
+	    key: 'showFixed',
+	    value: function showFixed() {
+	      if (!this.fixed) {
+	        this.$element.removeClass('hide-fixed');
+	        this.fixed = true;
 	      }
 	    }
 	  }]);

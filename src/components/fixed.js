@@ -8,12 +8,11 @@ export class Fixed {
     this.lastFrame = null;
     this.minWidth = options.minWidth;
     this.previousScroll = 0;
-    this.scrolling = false;
     this.upScroll = 0;
   }
 
   init() {
-    this.minScroll = this.$element.outerHeight() + this.$element.offset().top;
+    this.minScroll = this.$element.outerHeight();
 
     if (this.$context.width() >= this.minWidth && ! this.lastFrame) {
       this.lastFrame = this.check();
@@ -36,8 +35,6 @@ export class Fixed {
     this.currentScroll = this.$context.scrollTop();
 
     if (this.currentScroll > this.minScroll) {
-      this.setScrolling();
-
       if (this.previousScroll >= this.currentScroll) {
         this.upScroll += (this.previousScroll - this.currentScroll);
       } else {
@@ -45,13 +42,12 @@ export class Fixed {
       }
 
       if (this.upScroll >= this.delta) {
-        this.setFixed();
+        this.showFixed();
       } else {
-        this.removeFixed();
+        this.hideFixed();
       }
     } else {
-      this.removeScrolling();
-      this.removeFixed();
+      this.showFixed();
     }
 
     this.previousScroll = this.currentScroll;
@@ -65,31 +61,17 @@ export class Fixed {
     return this.lastFrame;
   }
 
-  setScrolling() {
-    if (! this.scrolling) {
-      this.$element.addClass('scrolling');
-      this.scrolling = true;
-    }
-  }
-
-  removeScrolling() {
-    if (this.scrolling) {
-      this.$element.removeClass('scrolling');
-      this.scrolling = false;
-    }
-  }
-
-  setFixed() {
-    if (! this.fixed) {
-      this.$element.addClass('fixed');
-      this.fixed = true;
-    }
-  }
-
-  removeFixed() {
+  hideFixed() {
     if (this.fixed) {
-      this.$element.removeClass('fixed');
+      this.$element.addClass('hide-fixed');
       this.fixed = false;
+    }
+  }
+
+  showFixed() {
+    if (! this.fixed) {
+      this.$element.removeClass('hide-fixed');
+      this.fixed = true;
     }
   }
 }
