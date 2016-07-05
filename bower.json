@@ -1,0 +1,6 @@
+{
+  "name": "fixed-navigation",
+  "dependencies": {
+    "jquery": "~3"
+  }
+}
