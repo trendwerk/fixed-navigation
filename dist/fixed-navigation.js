@@ -134,6 +134,8 @@
 
 	      if (this.$context.width() >= this.minWidth && !this.lastFrame) {
 	        this.lastFrame = this.check();
+	      } else if (!this.lastFrame) {
+	        this.showFixed();
 	      }
 	    }
 	  }, {
