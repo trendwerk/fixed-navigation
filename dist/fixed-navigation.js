@@ -48,7 +48,7 @@
 
 	var _plugin = __webpack_require__(1);
 
-	var plugin = new _plugin.Plugin(window.jQuery);
+	var plugin = new _plugin.Plugin();
 	plugin.init();
 
 /***/ },
@@ -69,18 +69,14 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var Plugin = exports.Plugin = function () {
-	  function Plugin(jQuery) {
+	  function Plugin() {
 	    _classCallCheck(this, Plugin);
-
-	    this.jQuery = jQuery;
 	  }
 
 	  _createClass(Plugin, [{
 	    key: 'init',
 	    value: function init() {
-	      var jQuery = this.jQuery;
-
-	      this.jQuery.fn.fixedNavigation = function fixedNavigation(options) {
+	      $.fn.fixedNavigation = function fixedNavigation(options) {
 	        if (!window.requestAnimationFrame) {
 	          return false;
 	        }
@@ -90,7 +86,7 @@
 	          minWidth: 0
 	        };
 
-	        var fixed = new _fixed.Fixed(this, jQuery(window), jQuery.extend(defaults, options));
+	        var fixed = new _fixed.Fixed(this, $(window), $.extend(defaults, options));
 	        fixed.init();
 	        fixed.registerEvents();
 

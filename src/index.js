@@ -1,4 +1,4 @@
 import { Plugin } from './components/plugin';
 
-const plugin = new Plugin(window.jQuery);
+const plugin = new Plugin();
 plugin.init();
