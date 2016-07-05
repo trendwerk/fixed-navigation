@@ -4,6 +4,7 @@
   ), $args);
 
   position: fixed;
+  top: 0;
   transition: transform map-get($settings, 'speed') ease-in-out;
   will-change: transform;
 
