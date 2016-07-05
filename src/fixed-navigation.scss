@@ -1,5 +1,10 @@
-@mixin fixed-navigation() {
+@mixin fixed-navigation($args: ()) {
+  $settings: map-merge((
+    'speed': 0.1s,
+  ), $args);
+
   transform: translateZ(0);
+  transition: transform map-get($settings, 'speed') ease-in-out;
 
   &.scrolling {
     position: fixed;
