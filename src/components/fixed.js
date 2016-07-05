@@ -57,8 +57,6 @@ export class Fixed {
     } else {
       this.lastFrame = null;
     }
-
-    return this.lastFrame;
   }
 
   hideFixed() {

@@ -186,8 +186,6 @@
 	      } else {
 	        this.lastFrame = null;
 	      }
-
-	      return this.lastFrame;
 	    }
 	  }, {
 	    key: 'hideFixed',
