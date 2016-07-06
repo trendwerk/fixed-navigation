@@ -45,7 +45,7 @@ $('.header').fixedNavigation({
 | `speed` | `0.2s` | No | Speed of the transition when showing the fixed element
 
 ## Fixed navigation + [Toggle navigation](https://github.com/trendwerk/toggle-navigation)
-Using these repositories together creates a few conflicts. This assumes you're using this repository to create a fixed header and are using `toggle-navigation` on the same header. Below you'll find a few tips on how to deal with these conflicts.
+When creating a fixed header and are using `toggle-navigation` on the same header, you'll encounter a few conflicts. You can find a brief summary below.
 
 | Problem | Description | Solution |
 | :--- | :--- | :--- | :--- |
