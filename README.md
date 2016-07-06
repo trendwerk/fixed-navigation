@@ -48,3 +48,4 @@ Using these repositories together create a few conflicts. Below you'll find a fe
 | :--- | :--- | :--- | :--- |
 | `position` | `position: absolute;` is applied by `toggle-navigation` from a certain breakpoint. This overwrites `position: fixed` from `fixed-navigation` | Apply `position: fixed` from the same breakpoint
 | `transition` | A `transition` is applied by `toggle-navigation` (from a certain breakpoint). This overwrites the `transition` from `fixed-navigation`, because there is [no way to add to transitions](https://github.com/sass/sass/issues/249) yet | Apply both transitions in your theme
+| body height | `toggle-navigation` sets the body height to `100%`, which forces the screen to the top and, when closing the navigation again, stays at the top of the screen | There is no elegant solution
