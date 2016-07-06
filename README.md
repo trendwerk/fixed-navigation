@@ -40,3 +40,10 @@ $('.header').fixedNavigation({
 | Option | Default | Required | Description |
 | :--- | :--- | :--- | :--- |
 | `speed` | `0.2s` | No | Speed of the transition when showing the fixed element
+
+## [Toggle navigation](https://github.com/trendwerk/toggle-navigation)
+Using these repositories together create a few conflicts. Below you'll find a few tips on how to deal with these conflicts.
+
+| Problem | Description | Solution |
+| :--- | :--- | :--- | :--- |
+| `position` | `position: absolute;` is applied by `toggle-navigation` from a certain breakpoint. This overwrites `position: fixed` | Apply `position: fixed` from this breakpoint
