@@ -49,13 +49,12 @@ Using these repositories together creates a few conflicts. This assumes you're u
 
 | Problem | Description | Solution |
 | :--- | :--- | :--- | :--- |
-| `position` | `position: absolute` is applied by `toggle-navigation` from a certain breakpoint. This overwrites `position: fixed` from `fixed-navigation` | Apply `position: fixed` from the same breakpoint when the header should be fixed
 | `transition` | A `transition` is applied by `toggle-navigation` (from a certain breakpoint). This overwrites the `transition` from `fixed-navigation`, because there is [no way to add to transitions](https://github.com/sass/sass/issues/249) yet | Apply both transitions in your theme under the right conditions
 | body height | `toggle-navigation` sets the body height to `100%`, which, when opening, forces the screen to the top and, when closing the navigation again, stays at the top of the screen | There is no elegant solution
 
 
 ### Example
-The example below shows how you could deal with the conflicts above. `$toggle-breakpoint` is assumed to be the breakpoint used for [the `until` parameter](https://github.com/trendwerk/toggle-navigation#until).
+The example below shows how you could deal with the `transition` conflict. `$toggle-breakpoint` is assumed to be the breakpoint used for [the `until` parameter](https://github.com/trendwerk/toggle-navigation#until).
 
 ```scss
 .header {
@@ -72,7 +71,6 @@ The example below shows how you could deal with the conflicts above. `$toggle-br
     transition: map-get($transitions, 'fixed');
 
     @media(max-width: ($toggle-breakpoint - 1px)) {
-      position: fixed;
       transition: map-values($transitions);
     }
   }
@@ -84,4 +82,3 @@ This makes sure that:
 - *Only* the `toggle-navigation` transition is applied when the header should not be fixed but could be toggled
 - *Only* the `fixed-navigation` transition is applied when the header should be fixed but could not be toggled
 - *Both* transitions are applied when the header should be fixed and could be toggled
-- `position: fixed` is applied when the header could be toggled (this overwrites `toggle-navigation`'s absolute positioning)
