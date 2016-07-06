@@ -49,7 +49,7 @@ Using these repositories together creates a few conflicts. This assumes you're u
 
 | Problem | Description | Solution |
 | :--- | :--- | :--- | :--- |
-| `transition` | A `transition` is applied by `toggle-navigation` (from a certain breakpoint). This overwrites the `transition` from `fixed-navigation`, because there is [no way to add to transitions](https://github.com/sass/sass/issues/249) yet | Apply both transitions in your theme under the right conditions
+| `transition` | A `transition` is applied by `toggle-navigation` (from a certain breakpoint). This overwrites the `transition` from `fixed-navigation`, because there is [no way to add to transitions](https://github.com/sass/sass/issues/249) yet | Apply the right transitions in your theme under the right conditions (see below)
 | body height | `toggle-navigation` sets the body height to `100%`, which, when opening, forces the screen to the top and, when closing the navigation again, stays at the top of the screen | There is no elegant solution
 
 
