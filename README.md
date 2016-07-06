@@ -33,7 +33,7 @@ $('.header').fixedNavigation({
 | Option | Default | Required | Description |
 | :--- | :--- | :--- | :--- |
 | `delta` | `40` | No | Distance to scroll up before showing the fixed element
-| `minWidth` | `0` | No | Minimum window width from which the fixed navigation is shown when scrolling up
+| `minWidth` | `0` | No | Minimum window width from which the fixed element is shown when scrolling up
 
 ### Mixin
 
