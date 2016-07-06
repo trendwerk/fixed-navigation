@@ -35,7 +35,7 @@ $('.header').fixedNavigation({
 | Option | Default | Required | Description |
 | :--- | :--- | :--- | :--- |
 | `delta` | `40` | No | Distance to scroll up before showing the fixed element
-| `minWidth` | `0` | No | Minimum window width from which the fixed element is fixed
+| `minWidth` | `0` | No | Minimum window width from which the element is fixed
 
 ### Mixin
 
@@ -44,47 +44,44 @@ $('.header').fixedNavigation({
 | `height` | `null` | Yes | Height of the header (this is used for the `padding-top` on body)
 | `speed` | `0.2s` | No | Speed of the transition when showing the fixed element
 
-## [Toggle navigation](https://github.com/trendwerk/toggle-navigation)
+## [Toggle navigation](https://github.com/trendwerk/toggle-navigation) + Fixed
 Using these repositories together creates a few conflicts. This assumes you're using this repository to create a fixed header and use `toggle-navigation` on the same header. Below you'll find a few tips on how to deal with these conflicts.
 
 | Problem | Description | Solution |
 | :--- | :--- | :--- | :--- |
-| `position` | `position: absolute` is applied by `toggle-navigation` from a certain breakpoint. This overwrites `position: fixed` from `fixed-navigation` | Apply `position: fixed` from the same breakpoint
+| `position` | `position: absolute` is applied by `toggle-navigation` from a certain breakpoint. This overwrites `position: fixed` from `fixed-navigation` | Apply `position: fixed` from the same breakpoint when the header should be fixed
 | `transition` | A `transition` is applied by `toggle-navigation` (from a certain breakpoint). This overwrites the `transition` from `fixed-navigation`, because there is [no way to add to transitions](https://github.com/sass/sass/issues/249) yet | Apply both transitions in your theme under the right conditions
 | body height | `toggle-navigation` sets the body height to `100%`, which, when opening, forces the screen to the top and, when closing the navigation again, stays at the top of the screen | There is no elegant solution
 
 
 ### Example
-The example below shows how you could deal with the conflicts above. This applies the solutions mentioned above and applies both mixins. Variables declared as `...` should be filled in and depend on your specific situation.
+The example below shows how you could deal with the conflicts above. `$toggle-breakpoint` is assumed to be the breakpoint used for [the `until` parameter](https://github.com/trendwerk/toggle-navigation#until).
 
 ```scss
 .header {
-  $header-height: ...;
-  $speeds: (
-    'fixed': 0.2s,
-    'toggle': 0.4s,
-  );
-  $toggle-breakpoint: ...;
   $transitions: (
-    'fixed': transform map-get($speeds, 'fixed') ease-in-out,
-    'toggle': (background map-get($speeds, 'toggle') cubic-bezier(0, 0, 0, 1), height map-get($speeds, 'toggle') cubic-bezier(0, 0, 0, 1)),
+    'fixed': transform 0.2s ease-in-out,
+    'toggle': (background 0.4s cubic-bezier(0, 0, 0, 1), height 0.4s cubic-bezier(0, 0, 0, 1)),
   );
-
-  @include fixed-navigation((
-    'speed': map-get($speeds, 'fixed'),
-  ));
-  @include toggle-navigation((
-    'height': $header-height,
-    'item': '.menu-item',
-    'menu': '.main-navigation',
-    'until': $toggle-breakpoint,
-    'speed': map-get($speeds, 'toggle'),
-  ));
-  transition: map-get($transitions, 'fixed');
 
   @media(max-width: ($toggle-breakpoint - 1px)) {
-    position: fixed;
-    transition: map-values($transitions);
+    transition: map-get($transitions, 'toggle');
+  }
+
+  .fixed & {
+    transition: map-get($transitions, 'fixed');
+
+    @media(max-width: ($toggle-breakpoint - 1px)) {
+      position: fixed;
+      transition: map-values($transitions);
+    }
   }
 }
 ```
+
+This makes sure that:
+
+- *Only* the `toggle-navigation` transition is applied when the header should not be fixed but could be toggled
+- *Only* the `fixed-navigation` transition is applied when the header should be fixed but could not be toggled
+- *Both* transitions are applied when the header should be fixed and could be toggled
+- `position: fixed` is applied when the header could be toggled (this overwrites `toggle-navigation`'s absolute positioning)
