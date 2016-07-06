@@ -113,12 +113,12 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var Fixed = exports.Fixed = function () {
-	  function Fixed(element, context, body, options) {
+	  function Fixed(element, window, body, options) {
 	    _classCallCheck(this, Fixed);
 
 	    this.$body = body;
-	    this.$context = context;
 	    this.$element = element;
+	    this.$window = window;
 	    this.currentScroll = 0;
 	    this.delta = options.delta;
 	    this.fixed = false;
@@ -134,7 +134,7 @@
 	    value: function init() {
 	      this.minScroll = this.$element.outerHeight();
 
-	      if (this.$context.width() >= this.minWidth && !this.lastFrame) {
+	      if (this.$window.width() >= this.minWidth && !this.lastFrame) {
 	        this.lastFrame = this.check();
 	        this.setFixed();
 	      } else if (!this.lastFrame) {
@@ -146,7 +146,7 @@
 	    value: function registerEvents() {
 	      var _this = this;
 
-	      this.$context.resize(function () {
+	      this.$window.resize(function () {
 	        _this.init();
 	      });
 	    }
@@ -162,7 +162,7 @@
 	  }, {
 	    key: 'calculate',
 	    value: function calculate() {
-	      this.currentScroll = this.$context.scrollTop();
+	      this.currentScroll = this.$window.scrollTop();
 
 	      if (this.currentScroll > this.minScroll) {
 	        if (this.previousScroll >= this.currentScroll) {
@@ -182,7 +182,7 @@
 
 	      this.previousScroll = this.currentScroll;
 
-	      if (this.$context.width() > this.minWidth) {
+	      if (this.$window.width() > this.minWidth) {
 	        this.lastFrame = this.check();
 	      } else {
 	        this.lastFrame = null;

@@ -1,8 +1,8 @@
 export class Fixed {
-  constructor(element, context, body, options) {
+  constructor(element, window, body, options) {
     this.$body = body;
-    this.$context = context;
     this.$element = element;
+    this.$window = window;
     this.currentScroll = 0;
     this.delta = options.delta;
     this.fixed = false;
@@ -16,7 +16,7 @@ export class Fixed {
   init() {
     this.minScroll = this.$element.outerHeight();
 
-    if (this.$context.width() >= this.minWidth && ! this.lastFrame) {
+    if (this.$window.width() >= this.minWidth && ! this.lastFrame) {
       this.lastFrame = this.check();
       this.setFixed();
     } else if (! this.lastFrame) {
@@ -25,7 +25,7 @@ export class Fixed {
   }
 
   registerEvents() {
-    this.$context.resize(() => {
+    this.$window.resize(() => {
       this.init();
     });
   }
@@ -37,7 +37,7 @@ export class Fixed {
   }
 
   calculate() {
-    this.currentScroll = this.$context.scrollTop();
+    this.currentScroll = this.$window.scrollTop();
 
     if (this.currentScroll > this.minScroll) {
       if (this.previousScroll >= this.currentScroll) {
@@ -57,7 +57,7 @@ export class Fixed {
 
     this.previousScroll = this.currentScroll;
 
-    if (this.$context.width() > this.minWidth) {
+    if (this.$window.width() > this.minWidth) {
       this.lastFrame = this.check();
     } else {
       this.lastFrame = null;
