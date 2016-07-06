@@ -86,7 +86,7 @@
 	          minWidth: 0
 	        };
 
-	        var fixed = new _fixed.Fixed(this, $(window), $.extend(defaults, options));
+	        var fixed = new _fixed.Fixed(this, $(window), $('body'), $.extend(defaults, options));
 	        fixed.init();
 	        fixed.registerEvents();
 
@@ -113,18 +113,20 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var Fixed = exports.Fixed = function () {
-	  function Fixed(element, context, options) {
+	  function Fixed(element, context, body, options) {
 	    _classCallCheck(this, Fixed);
 
+	    this.$body = body;
 	    this.$context = context;
 	    this.$element = element;
 	    this.currentScroll = 0;
 	    this.delta = options.delta;
-	    this.fixed = true;
+	    this.fixed = false;
 	    this.lastFrame = null;
 	    this.minWidth = options.minWidth;
 	    this.previousScroll = 0;
 	    this.upScroll = 0;
+	    this.visible = true;
 	  }
 
 	  _createClass(Fixed, [{
@@ -134,8 +136,9 @@
 
 	      if (this.$context.width() >= this.minWidth && !this.lastFrame) {
 	        this.lastFrame = this.check();
+	        this.setFixed();
 	      } else if (!this.lastFrame) {
-	        this.showFixed();
+	        this.removeFixed();
 	      }
 	    }
 	  }, {
@@ -186,19 +189,35 @@
 	      }
 	    }
 	  }, {
+	    key: 'setFixed',
+	    value: function setFixed() {
+	      if (!this.fixed) {
+	        this.$body.addClass('fixed');
+	        this.fixed = true;
+	      }
+	    }
+	  }, {
+	    key: 'removeFixed',
+	    value: function removeFixed() {
+	      if (this.fixed) {
+	        this.$body.removeClass('fixed');
+	        this.fixed = false;
+	      }
+	    }
+	  }, {
 	    key: 'hideFixed',
 	    value: function hideFixed() {
-	      if (this.fixed) {
+	      if (this.visible) {
 	        this.$element.addClass('hide-fixed');
-	        this.fixed = false;
+	        this.visible = false;
 	      }
 	    }
 	  }, {
 	    key: 'showFixed',
 	    value: function showFixed() {
-	      if (!this.fixed) {
+	      if (!this.visible) {
 	        this.$element.removeClass('hide-fixed');
-	        this.fixed = true;
+	        this.visible = true;
 	      }
 	    }
 	  }]);

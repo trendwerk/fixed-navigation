@@ -1,14 +1,16 @@
 export class Fixed {
-  constructor(element, context, options) {
+  constructor(element, context, body, options) {
+    this.$body = body;
     this.$context = context;
     this.$element = element;
     this.currentScroll = 0;
     this.delta = options.delta;
-    this.fixed = true;
+    this.fixed = false;
     this.lastFrame = null;
     this.minWidth = options.minWidth;
     this.previousScroll = 0;
     this.upScroll = 0;
+    this.visible = true;
   }
 
   init() {
@@ -16,8 +18,9 @@ export class Fixed {
 
     if (this.$context.width() >= this.minWidth && ! this.lastFrame) {
       this.lastFrame = this.check();
+      this.setFixed();
     } else if (! this.lastFrame) {
-      this.showFixed();
+      this.removeFixed();
     }
   }
 
@@ -61,17 +64,31 @@ export class Fixed {
     }
   }
 
-  hideFixed() {
+  setFixed() {
+    if (! this.fixed) {
+      this.$body.addClass('fixed');
+      this.fixed = true;
+    }
+  }
+
+  removeFixed() {
     if (this.fixed) {
-      this.$element.addClass('hide-fixed');
+      this.$body.removeClass('fixed');
       this.fixed = false;
     }
   }
 
+  hideFixed() {
+    if (this.visible) {
+      this.$element.addClass('hide-fixed');
+      this.visible = false;
+    }
+  }
+
   showFixed() {
-    if (! this.fixed) {
+    if (! this.visible) {
       this.$element.removeClass('hide-fixed');
-      this.fixed = true;
+      this.visible = true;
     }
   }
 }
