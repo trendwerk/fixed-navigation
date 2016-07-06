@@ -8,17 +8,19 @@
     @error '`height` should be set in fixed-navigation() arguments.';
   }
 
-  position: fixed;
-  top: 0;
-  transition: transform map-get($settings, 'speed') ease-in-out;
-  will-change: transform;
+  .fixed & {
+    position: fixed;
+    top: 0;
+    transition: transform map-get($settings, 'speed') ease-in-out;
+    will-change: transform;
 
-  &.hide-fixed {
-    transform: translateY(-100%);
+    &.hide-fixed {
+      transform: translateY(-100%);
+    }
   }
 
   @at-root {
-    body {
+    body.fixed {
       padding-top: map-get($settings, 'height');
     }
   }
