@@ -1,7 +1,12 @@
 @mixin fixed-navigation($args: ()) {
   $settings: map-merge((
+    'height': null,
     'speed': 0.2s,
   ), $args);
+
+  @if not map-get($settings, 'height') {
+    @error '`height` should be set in fixed-navigation() arguments.';
+  }
 
   position: fixed;
   top: 0;
@@ -10,5 +15,11 @@
 
   &.hide-fixed {
     transform: translateY(-100%);
+  }
+
+  @at-root {
+    body {
+      padding-top: map-get($settings, 'height');
+    }
   }
 }
