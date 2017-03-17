@@ -87,6 +87,7 @@
 	        };
 
 	        var fixed = new _fixed.Fixed(this, jQuery(window), jQuery('body'), jQuery.extend(defaults, options));
+
 	        fixed.init();
 	        fixed.registerEvents();
 

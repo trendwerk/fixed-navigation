@@ -12,7 +12,12 @@ export class Plugin {
         minWidth: 0,
       };
 
-      const fixed = new Fixed(this, jQuery(window), jQuery('body'), jQuery.extend(defaults, options));
+      const fixed = new Fixed(
+        this, jQuery(window),
+        jQuery('body'),
+        jQuery.extend(defaults, options)
+      );
+
       fixed.init();
       fixed.registerEvents();
 
