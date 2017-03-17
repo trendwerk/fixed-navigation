@@ -137,8 +137,6 @@
 	      if (this.$window.width() >= this.minWidth && !this.lastFrame) {
 	        this.lastFrame = this.check();
 	        this.setFixed();
-	      } else if (!this.lastFrame) {
-	        this.removeFixed();
 	      }
 	    }
 	  }, {
@@ -186,6 +184,7 @@
 	        this.lastFrame = this.check();
 	      } else {
 	        this.lastFrame = null;
+	        this.removeFixed();
 	      }
 	    }
 	  }, {
