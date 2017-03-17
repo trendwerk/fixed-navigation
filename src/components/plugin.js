@@ -2,7 +2,7 @@ import { Fixed } from './fixed';
 
 export class Plugin {
   init() {
-    $.fn.fixedNavigation = function fixedNavigation(options) {
+    jQuery.fn.fixedNavigation = function fixedNavigation(options) {
       if (! window.requestAnimationFrame) {
         return false;
       }
@@ -12,7 +12,7 @@ export class Plugin {
         minWidth: 0,
       };
 
-      const fixed = new Fixed(this, $(window), $('body'), $.extend(defaults, options));
+      const fixed = new Fixed(this, jQuery(window), jQuery('body'), jQuery.extend(defaults, options));
       fixed.init();
       fixed.registerEvents();
 

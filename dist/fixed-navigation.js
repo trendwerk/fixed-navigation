@@ -76,7 +76,7 @@
 	  _createClass(Plugin, [{
 	    key: 'init',
 	    value: function init() {
-	      $.fn.fixedNavigation = function fixedNavigation(options) {
+	      jQuery.fn.fixedNavigation = function fixedNavigation(options) {
 	        if (!window.requestAnimationFrame) {
 	          return false;
 	        }
@@ -86,7 +86,7 @@
 	          minWidth: 0
 	        };
 
-	        var fixed = new _fixed.Fixed(this, $(window), $('body'), $.extend(defaults, options));
+	        var fixed = new _fixed.Fixed(this, jQuery(window), jQuery('body'), jQuery.extend(defaults, options));
 	        fixed.init();
 	        fixed.registerEvents();
 
