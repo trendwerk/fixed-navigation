@@ -182,7 +182,7 @@
 
 	      this.previousScroll = this.currentScroll;
 
-	      if (this.$window.width() > this.minWidth) {
+	      if (this.$window.width() >= this.minWidth) {
 	        this.lastFrame = this.check();
 	      } else {
 	        this.lastFrame = null;
