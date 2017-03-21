@@ -19,8 +19,6 @@ export class Fixed {
     if (this.$window.width() >= this.minWidth && ! this.lastFrame) {
       this.lastFrame = this.check();
       this.setFixed();
-    } else if (! this.lastFrame) {
-      this.removeFixed();
     }
   }
 
@@ -61,6 +59,7 @@ export class Fixed {
       this.lastFrame = this.check();
     } else {
       this.lastFrame = null;
+      this.removeFixed();
     }
   }
 
