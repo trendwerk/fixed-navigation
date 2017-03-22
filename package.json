@@ -11,6 +11,6 @@
     "webpack": "^1.13.1"
   },
   "scripts": {
-    "postinstall": "webpack --watch"
+    "start": "webpack --watch"
   }
 }
